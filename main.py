@@ -15,34 +15,54 @@ args = parser.parse_args()
 filename = args.filename
 results = []
 line_count = 0
-if args.count_bytes:
 
-    with open(filename, 'rb') as file:
+def count_bytes():
+     with open(filename, 'rb') as file:
         file.seek(0, 2)
         byte_count = file.tell()
         results.append(str(byte_count))
-       
 
-if args.count_lines:
-
+def count_lines():
     with open(filename, 'r') as file:
         line_count = sum(1 for line in file)
         results.append(str(line_count))
-        
-if args.count_words:
-   
+
+
+def count_words():
     with open(filename, 'r') as file:
         word_count = sum(len(line.split()) for line in file)
         results.append(str(word_count))
 
-if args.count_chars:
-
+def count_chars():
     with open(filename, 'r') as file:
         char_count = sum(len(line)+1 for line in file)
         results.append(str(char_count))
 
-results.append(filename)
+if args.count_bytes:
+    count_bytes()
+       
 
+if args.count_lines:
+    count_lines()
+   
+        
+if args.count_words:
+   count_words()
+  
+
+if args.count_chars:
+    count_chars()
+
+
+if args.count_bytes==args.count_lines == args.count_words == args.count_chars==False:
+    count_bytes()
+    count_lines()
+    count_words()
+    count_chars()
+
+results.append(filename)
 
 print( ' '.join(results) )
 
+#TODO: Ordorner les count par ordre croissant.
+# TODO: Pipe
