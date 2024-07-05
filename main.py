@@ -14,6 +14,7 @@ args = parser.parse_args()
 
 filename = args.filename
 results = []
+line_count = 0
 if args.count_bytes:
 
     with open(filename, 'rb') as file:
@@ -37,7 +38,7 @@ if args.count_words:
 if args.count_chars:
 
     with open(filename, 'r') as file:
-        char_count = len(file.read())
+        char_count = sum(len(line)+1 for line in file)
         results.append(str(char_count))
 
 results.append(filename)
